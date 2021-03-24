@@ -1,11 +1,9 @@
-import React,{Component} from 'react'
+import React from 'react'
 
-export class UserInfo extends Component{
-    render(){
-        return(
-            <div className="mt-5 d-flex justify-content-left">
-                This is UserInfo page.
-            </div>
-        )
-    }
-}
+const UserInfo = () => (
+    <div className="mt-5 d-flex justify-content-left">
+        This is UserInfo page.
+    </div>
+);
+
+export default UserInfo;
