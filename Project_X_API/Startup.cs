@@ -1,15 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Project_X_API.DataBase;
+using Project_X_API.DataBase.Repositories;
+using Project_X_API.Properties;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Project_X_API
 {
@@ -26,6 +25,12 @@ namespace Project_X_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddTransient<RolesRepository>();
+            services.AddDbContextPool<DataBaseContext>(dbContextOptions =>
+                dbContextOptions.UseMySql(Resources.ConnectionString, new MySqlServerVersion(new Version(8, 0, 24)), mySqlOptions => mySqlOptions
+                      .CharSetBehavior(CharSetBehavior.NeverAppend)));
+
+            services.AddSingleton(_ => Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
