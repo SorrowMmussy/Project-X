@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Project_X_API.DataBase.Tables;
 
 namespace Project_X_API.DataBase.Configuration
 {
-    public class UsersConfiguration
+    public class UsersConfiguration : IEntityTypeConfiguration<User>
     {
-
+        public void Configure(EntityTypeBuilder<User> builder)
+        {
+            builder.HasKey(user => user.Id);
+        }
     }
 }

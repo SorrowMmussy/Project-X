@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5/A38v0o+83l3IVZRZJG5L7CpjuTB4tU/PokY988LoXJdHszBM6NT1cV+XbCOFeHt/5N0WUksr1XXFXmsbDY5A==",
+  "dgSpecHash": "xV0UOxdMqlLdQj8AOpDxP5UFh7Hx3RHnKn5inXsgQNdhdX7LzvUznmB5oiy1v0UY/w4T4ffh1B7AP7ca6VCPPg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Kami-Sama\\Desktop\\BakiProject\\project-x\\Project_X_API\\Project_X_API.csproj",
+  "projectFilePath": "C:\\Users\\Kami-Sama\\Desktop\\Project-X\\Project-X\\Project_X_API\\Project_X_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kami-Sama\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Kami-Sama\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

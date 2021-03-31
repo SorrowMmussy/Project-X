@@ -4,27 +4,25 @@ using System.Linq;
 
 namespace Project_X_API.DataBase.Repositories
 {
-    public class RolesRepository
+    public class UserRepository
     {
         private readonly DataBaseContext _dataBase;
 
-        public RolesRepository(DataBaseContext dataBase)
+        public UserRepository(DataBaseContext dataBase)
         {
             _dataBase = dataBase;
         }
 
-        public void AddRole(Role newRole)
+        public void AddUser(User newUser)
         {
-            _dataBase.Roles.Add(newRole);
+            _dataBase.UsersLoginInfo.Add(newUser);
 
             _dataBase.SaveChanges();
         }
 
-        public List<Role> GetAllRoles()
+        public List<User> GetAllUsers()
         {
-            //_dataBase.Roles.Find(roleId);
-
-            return _dataBase.Roles.ToList();
+            return _dataBase.UsersLoginInfo.ToList();
         }
     }
 }
