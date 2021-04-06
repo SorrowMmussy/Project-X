@@ -9,6 +9,7 @@ using Project_X_API.DataBase;
 using Project_X_API.DataBase.Repositories;
 using Project_X_API.Properties;
 using System;
+using Project_X_API.Services;
 
 namespace Project_X_API
 {
@@ -26,10 +27,14 @@ namespace Project_X_API
         {
             services.AddControllers();
             services.AddTransient<RolesRepository>();
+            services.AddTransient<EmailServices>();
+            services.AddTransient<UserServices>();
+            services.AddTransient<TokenValidationRepository>();
+            services.AddTransient<UserRepository>();
             services.AddDbContextPool<DataBaseContext>(dbContextOptions =>
                 dbContextOptions.UseMySql(Resources.ConnectionString, new MySqlServerVersion(new Version(8, 0, 24)), mySqlOptions => mySqlOptions
                       .CharSetBehavior(CharSetBehavior.NeverAppend)));
-
+            
             services.AddSingleton(_ => Configuration);
         }
 

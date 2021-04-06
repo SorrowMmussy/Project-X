@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project_X_API.DataBase.Tables
 {
+    [Table(nameof(Role))]
     public class Role
     {
         [Key]

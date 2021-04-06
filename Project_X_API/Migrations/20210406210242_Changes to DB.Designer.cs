@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_X_API.DataBase;
 
 namespace Project_X_API.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210406210242_Changes to DB")]
+    partial class ChangestoDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,7 +106,8 @@ namespace Project_X_API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleId")
+                        .IsUnique();
 
                     b.ToTable("User");
                 });
@@ -123,12 +126,17 @@ namespace Project_X_API.Migrations
             modelBuilder.Entity("Project_X_API.DataBase.Tables.User", b =>
                 {
                     b.HasOne("Project_X_API.DataBase.Tables.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
+                        .WithOne("User")
+                        .HasForeignKey("Project_X_API.DataBase.Tables.User", "RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Project_X_API.DataBase.Tables.Role", b =>
+                {
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Project_X_API.DataBase.Tables.User", b =>

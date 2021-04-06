@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Project_X_API.DataBase.Repositories;
 using Project_X_API.DataBase.Tables;
+using Project_X_API.Services;
 
 namespace Project_X_API.Controllers
 {
@@ -10,12 +10,14 @@ namespace Project_X_API.Controllers
     public class UsersLoginInfoController : ControllerBase
     {
         private readonly ILogger<UsersLoginInfoController> _logger;
-        private readonly UserRepository _userRepository;
+        private readonly EmailServices _emailServices;
+        private readonly UserServices _userServices;
 
-        public UsersLoginInfoController(ILogger<UsersLoginInfoController> logger, UserRepository userRepository)
+        public UsersLoginInfoController(ILogger<UsersLoginInfoController> logger, EmailServices emailServices, UserServices userServices)
         {
             _logger = logger;
-            _userRepository = userRepository;
+            _emailServices = emailServices;
+            _userServices = userServices;
         }
 
         [HttpPost]
@@ -26,7 +28,8 @@ namespace Project_X_API.Controllers
                 return BadRequest();
             }
 
-            _userRepository.AddUser(userToAdd);
+            _userServices.AddUserToDataBase(userToAdd);
+            _emailServices.SendToken();
 
             return Accepted(userToAdd);
         }
@@ -34,7 +37,7 @@ namespace Project_X_API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_userRepository.GetAllUsers());
+            return Ok(_userServices.GetAllUsers());
         }
     }
 }

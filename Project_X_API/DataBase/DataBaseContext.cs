@@ -14,13 +14,13 @@ namespace Project_X_API.DataBase
 
         public DbSet<User> UsersLoginInfo { get; set; }
 
-        public DbSet<UserData> UsersPersonalInfo { get; set; }
+        public DbSet<TokenValidation> TokenValidations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
-            modelBuilder.ApplyConfiguration(new UserDataConfiguration());
             modelBuilder.ApplyConfiguration(new UsersConfiguration());
+            modelBuilder.ApplyConfiguration(new TokenValidationConfiguration());
         }
     }
 }

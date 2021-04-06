@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_X_API.DataBase;
 
 namespace Project_X_API.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210406203218_Fix for validation tables")]
+    partial class Fixforvalidationtables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +30,12 @@ namespace Project_X_API.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
 
+                    b.Property<int?>("TokenValidationId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TokenValidationId");
 
                     b.ToTable("Role");
                 });
@@ -104,9 +111,19 @@ namespace Project_X_API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleId")
+                        .IsUnique();
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("Project_X_API.DataBase.Tables.Role", b =>
+                {
+                    b.HasOne("Project_X_API.DataBase.Tables.TokenValidation", "TokenValidation")
+                        .WithMany()
+                        .HasForeignKey("TokenValidationId");
+
+                    b.Navigation("TokenValidation");
                 });
 
             modelBuilder.Entity("Project_X_API.DataBase.Tables.TokenValidation", b =>
@@ -123,12 +140,17 @@ namespace Project_X_API.Migrations
             modelBuilder.Entity("Project_X_API.DataBase.Tables.User", b =>
                 {
                     b.HasOne("Project_X_API.DataBase.Tables.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
+                        .WithOne("User")
+                        .HasForeignKey("Project_X_API.DataBase.Tables.User", "RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Project_X_API.DataBase.Tables.Role", b =>
+                {
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Project_X_API.DataBase.Tables.User", b =>
