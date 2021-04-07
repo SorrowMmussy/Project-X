@@ -68,5 +68,14 @@ namespace Project_X_API.Properties {
                 return ResourceManager.GetString("ConnectionString", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to P11%%&amp;*945Swoof&amp;.
+        /// </summary>
+        internal static string TestEmailPassword {
+            get {
+                return ResourceManager.GetString("TestEmailPassword", resourceCulture);
+            }
+        }
     }
 }

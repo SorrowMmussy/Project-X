@@ -1,6 +1,7 @@
 ﻿using Project_X_API.DataBase.Repositories;
 using System.Net;
 using System.Net.Mail;
+using Project_X_API.Properties;
 
 namespace Project_X_API.Services
 {
@@ -33,7 +34,7 @@ namespace Project_X_API.Services
                 using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
                     smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = new NetworkCredential("projectxtestemail@gmail.com", "P11%%&*945Swoof&");
+                    smtp.Credentials = new NetworkCredential("projectxtestemail@gmail.com", Resources.TestEmailPassword);
                     smtp.EnableSsl = true;
                     smtp.Send(mail);
                 }

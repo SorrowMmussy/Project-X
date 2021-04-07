@@ -120,4 +120,7 @@
   <data name="ConnectionString" xml:space="preserve">
     <value>server=localhost;port=3306;database=login_scheme;user=root;password=Pro-&amp;jectX5@Uni*5</value>
   </data>
+  <data name="TestEmailPassword" xml:space="preserve">
+    <value>P11%%&amp;*945Swoof&amp;</value>
+  </data>
 </root>
