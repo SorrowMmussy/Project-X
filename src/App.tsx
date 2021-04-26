@@ -9,6 +9,7 @@ import UserRegistry from './pages/UserRegistry';
 import ExplosiveSearchPage from './pages/ExplosiveSearchPage';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import UserRegistration from './pages/UserRegistration';
 
 function App() {
     const isAuthenticated = false;
@@ -25,12 +26,12 @@ function App() {
                         <>
                             <Route path="/userInfo" component={UserInfo} exact />
                             <Route path="/userRegistry" component={UserRegistry} exact />
-                            <Route path="/addNewUser" component={AddNewUserPage} exact />
+                            {/*<Route path="/addNewUser" component={AddNewUserPage} exact />*/}
                         </>
                     ) : (
                         <>
                             <Route path="/" component={Home} exact />
-                            <Route path="/registration/:token" component={UserRegistration} exact />
+                            <Route path="/registration" component={UserRegistration} exact />
                         </>
                     )}
                 </Switch>

@@ -8,8 +8,8 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Project_X_API.DataBase;
 using Project_X_API.DataBase.Repositories;
 using Project_X_API.Properties;
-using System;
 using Project_X_API.Services;
+using System;
 
 namespace Project_X_API
 {
@@ -25,6 +25,12 @@ namespace Project_X_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.WithOrigins("http://localhost:3000").SetIsOriginAllowed((host) => "http://localhost:3000".Equals(host, StringComparison.InvariantCultureIgnoreCase)).AllowAnyMethod().AllowAnyHeader());
+            });
+
             services.AddControllers();
             services.AddTransient<RolesRepository>();
             services.AddTransient<EmailServices>();
@@ -34,7 +40,7 @@ namespace Project_X_API
             services.AddDbContextPool<DataBaseContext>(dbContextOptions =>
                 dbContextOptions.UseMySql(Resources.ConnectionString, new MySqlServerVersion(new Version(8, 0, 24)), mySqlOptions => mySqlOptions
                       .CharSetBehavior(CharSetBehavior.NeverAppend)));
-            
+
             services.AddSingleton(_ => Configuration);
         }
 
@@ -46,9 +52,10 @@ namespace Project_X_API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
+            app.UseCors("CorsPolicy");
+
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

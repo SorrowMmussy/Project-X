@@ -43,6 +43,9 @@ namespace Project_X_API.DataBase.Tables
 
         public virtual Role Role { get; set; }
 
+        [MaxLength(64)]
+        public string Token { get; set; }
+
         public virtual List<TokenValidation> Tokens { get; set; }
     }
 }

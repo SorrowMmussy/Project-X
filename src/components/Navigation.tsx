@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 
-console.log(Navbar, Navbar.Toogle, Navbar.Collapse, Nav, NavLink);
+console.log(Navbar, Navbar.Toggle, Navbar.Collapse, Nav, NavLink);
 const Navigation = () => (
     <Navbar bg="dark" expand="lg">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -22,6 +22,10 @@ const Navigation = () => (
 
                 <NavLink className="d-inline p-2 bg-dark text-white" to="ExplosiveSearchPage">
                     ExplosiveSearchPage
+                </NavLink>
+
+                <NavLink className="d-inline p-2 bg-dark text-white" to="registration">
+                    UserRegistration
                 </NavLink>
             </Nav>
         </Navbar.Collapse>

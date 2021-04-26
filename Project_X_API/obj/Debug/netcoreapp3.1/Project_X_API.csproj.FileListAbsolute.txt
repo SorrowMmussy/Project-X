@@ -132,3 +132,4 @@ C:\Users\Kami-Sama\Desktop\Project-X\Project-X\Project_X_API\obj\Debug\netcoreap
 C:\Users\Kami-Sama\Desktop\Project-X\Project-X\Project_X_API\obj\Debug\netcoreapp3.1\Project_X_API.dll
 C:\Users\Kami-Sama\Desktop\Project-X\Project-X\Project_X_API\obj\Debug\netcoreapp3.1\Project_X_API.pdb
 C:\Users\Kami-Sama\Desktop\Project-X\Project-X\Project_X_API\obj\Debug\netcoreapp3.1\Project_X_API.genruntimeconfig.cache
+C:\Users\Kami-Sama\Desktop\Project-X\Project-X\Project_X_API\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
