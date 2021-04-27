@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Project_X_API.DataBase.Repositories;
 using Project_X_API.DataBase.Tables;
@@ -8,12 +9,12 @@ namespace Project_X_API.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    public class AuthentificationController : ControllerBase
+    public class AuthenticationController : ControllerBase
     {
-        private readonly ILogger<AuthentificationController> _logger;
+        private readonly ILogger<AuthenticationController> _logger;
         private readonly UserRepository _userRepository;
 
-        public AuthentificationController(ILogger<AuthentificationController> logger, UserRepository userRepository)
+        public AuthenticationController(ILogger<AuthenticationController> logger, UserRepository userRepository)
         {
             _logger = logger;
             _userRepository = userRepository;
@@ -31,6 +32,25 @@ namespace Project_X_API.Controllers
             _userRepository.AddUser(new User(){Username = userToAdd.Username, PasswordHash = passwordHash, Token = userToAdd.Token});
 
             return Accepted(userToAdd);
+        }
+
+        [HttpPost]
+        public IActionResult Authenticate([FromBody] UserDTO userToAuthenticate)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var account = _userRepository.GetAllUsers().SingleOrDefault(x => x.Email == userToAuthenticate.Username);
+            if (account == null || !BCrypt.Net.BCrypt.Verify(userToAuthenticate.Password, account.PasswordHash))
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                return Accepted(userToAuthenticate);
+            }
         }
     }
 }
