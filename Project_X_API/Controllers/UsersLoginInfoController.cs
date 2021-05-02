@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Project_X_API.DataBase.Tables;
 using Project_X_API.Services;
@@ -35,9 +37,9 @@ namespace Project_X_API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public ActionResult<List<User>> GetAll()
         {
-            return Ok(_userServices.GetAllUsers());
+            return _userServices.GetAllUsers();
         }
     }
 }

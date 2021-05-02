@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Alert, Form } from 'react-bootstrap';
+import { Cookies } from 'react-cookie';
 import { useParams } from 'react-router';
 
 const LoginForm = () => {
@@ -8,11 +9,29 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
     const [alertText, setAlertText] = useState('');
     const [isAlertVisible, setAlertVisible] = useState(false);
+    const jwtCookieName = 'jwt';
+    const cookies = new Cookies();
+
+    function login(username: string, password: string) {
+        return axios
+            .post(
+                'http://localhost:54592/Authentification/Authenticate',
+                { Username: username, Password: password },
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true,
+                }
+            )
+            .then((response) => {
+                cookies.set(jwtCookieName, response.data, { sameSite: 'strict' });
+            });
+    }
 
     const handleSubmit = () => {
         setAlertVisible(false);
 
-        //uuuummmmm
+        login(userName, password);
     };
 
     return (

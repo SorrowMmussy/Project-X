@@ -5895,7 +5895,8 @@
       "Microsoft.EntityFrameworkCore.Relational >= 5.0.4",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.4",
-      "Pomelo.EntityFrameworkCore.MySql >= 5.0.0-alpha.2"
+      "Pomelo.EntityFrameworkCore.MySql >= 5.0.0-alpha.2",
+      "System.IdentityModel.Tokens.Jwt >= 5.6.0"
     ]
   },
   "packageFolders": {
@@ -5972,6 +5973,10 @@
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[5.0.0-alpha.2, )"
+          },
+          "System.IdentityModel.Tokens.Jwt": {
+            "target": "Package",
+            "version": "[5.6.0, )"
           }
         },
         "imports": [
