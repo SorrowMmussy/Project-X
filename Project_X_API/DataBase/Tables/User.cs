@@ -39,12 +39,9 @@ namespace Project_X_API.DataBase.Tables
         [MaxLength(20)]
         public string MobilePhone { get; set; }
 
-        public int WrongLoginAttempts { get; set; }
+        public int? WrongLoginAttempts { get; set; }
 
         public virtual Role Role { get; set; }
-
-        [MaxLength(64)]
-        public string Token { get; set; }
 
         public virtual List<TokenValidation> Tokens { get; set; }
     }

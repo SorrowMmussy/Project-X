@@ -4,12 +4,12 @@ import { Alert, Form } from 'react-bootstrap';
 import { useParams } from 'react-router';
 
 const UserRegistration = () => {
+    const { token } = useParams<{ token: string }>();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
 
     const [alertText, setAlertText] = useState('');
-
     const [isAlertVisible, setAlertVisible] = useState(false);
 
     const handleSubmit = () => {
@@ -21,7 +21,11 @@ const UserRegistration = () => {
         }
 
         axios
-            .post('http://localhost:54592/Authentification/Add', { username: userName, password: password })
+            .post('http://localhost:54592/Authentification/Add', {
+                username: userName,
+                password: password,
+                token: token,
+            })
             .then((response) => {
                 setAlertText('Uzregistruotas');
                 setAlertVisible(true);

@@ -2,77 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_X_API.DataBase;
 
 namespace Project_X_API.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210508183258_synch-up")]
+    partial class synchup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.4");
-
-            modelBuilder.Entity("Project_X_API.DataBase.Tables.ExplosiveData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Assembly")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Caliber")
-                        .HasMaxLength(48)
-                        .HasColumnType("varchar(48)");
-
-                    b.Property<string>("Category")
-                        .HasMaxLength(48)
-                        .HasColumnType("varchar(48)");
-
-                    b.Property<string>("DetonatorTypeId")
-                        .HasMaxLength(48)
-                        .HasColumnType("varchar(48)");
-
-                    b.Property<string>("ExplosivePurposeId")
-                        .HasMaxLength(48)
-                        .HasColumnType("varchar(48)");
-
-                    b.Property<int>("Height")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Length")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ManufacturersCountry")
-                        .HasMaxLength(48)
-                        .HasColumnType("varchar(48)");
-
-                    b.Property<string>("Material")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(48)
-                        .HasColumnType("varchar(48)");
-
-                    b.Property<string>("Note")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Tier")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Width")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExplosiveData");
-                });
 
             modelBuilder.Entity("Project_X_API.DataBase.Tables.Role", b =>
                 {

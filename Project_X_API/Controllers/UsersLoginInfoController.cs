@@ -31,7 +31,6 @@ namespace Project_X_API.Controllers
             }
 
             _userServices.AddUserToDataBase(userToAdd);
-            _emailServices.SendToken();
 
             return Accepted(userToAdd);
         }

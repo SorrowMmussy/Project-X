@@ -11,7 +11,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Project_X_API.Controllers
 {
@@ -23,13 +22,28 @@ namespace Project_X_API.Controllers
         private readonly ILogger<AuthenticationController> _logger;
         private readonly UserServices _userServices;
         private readonly UserRepository _userRepository;
+        private readonly EmailServices _emailServices;
 
-        public AuthenticationController(ILogger<AuthenticationController> logger, UserServices userServices, IConfiguration config, UserRepository userRepository)
+        public AuthenticationController(ILogger<AuthenticationController> logger, UserServices userServices, IConfiguration config, UserRepository userRepository, EmailServices emailServices)
         {
             _logger = logger;
             _configuration = config;
             _userRepository = userRepository;
+            _emailServices = emailServices;
             _userServices = userServices;
+        }
+
+        [HttpPost]
+        public IActionResult EmailRegistration([FromBody] UserEmailDTO userToAdd)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _emailServices.SendToken(userToAdd.Email);
+
+            return Accepted(userToAdd);
         }
 
         [HttpPost]
@@ -40,8 +54,20 @@ namespace Project_X_API.Controllers
                 return BadRequest();
             }
 
+            ClaimsPrincipal jwtSecurity;
+            try
+            {
+                jwtSecurity = new JwtSecurityTokenHandler().ValidateToken(userToAdd.Token, new TokenValidationParameters(), out _);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+            var email = jwtSecurity.Claims.FirstOrDefault(claim => claim.Type == "Email").Value;
+
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(userToAdd.Password);
-            _userServices.AddUserToDataBase(new User() { Username = userToAdd.Username, PasswordHash = passwordHash, Token = userToAdd.Token });
+            _userServices.AddUserToDataBase(new User() { Username = userToAdd.Username, PasswordHash = passwordHash, Email = email, RoleId = 1 });
 
             return Accepted(userToAdd);
         }
@@ -58,9 +84,9 @@ namespace Project_X_API.Controllers
             {
                 return BadRequest();
             }
-            
-            var userAccount = _userServices.GetAllUsers().FirstOrDefault(x => x.Email == userToAuthenticate.Username);
-            if (userAccount == null && !BCrypt.Net.BCrypt.Verify(userToAuthenticate.Password, userAccount.PasswordHash))
+
+            var userAccount = _userServices.GetAllUsers().FirstOrDefault(x => x.Username == userToAuthenticate.Username);
+            if (userAccount == null || !BCrypt.Net.BCrypt.Verify(userToAuthenticate.Password, userAccount.PasswordHash))
             {
                 return BadRequest("Invalid credentials");
             }
@@ -70,8 +96,7 @@ namespace Project_X_API.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                 new Claim("Id", userAccount.Id.ToString()),
-                new Claim("UserName", userAccount.Username),
-                new Claim("Email", userAccount.Email)
+                new Claim("UserName", userAccount.Username)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

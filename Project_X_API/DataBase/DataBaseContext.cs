@@ -12,6 +12,8 @@ namespace Project_X_API.DataBase
 
         public DbSet<Role> Roles { get; set; }
 
+        public DbSet<ExplosiveData> ExplosiveData { get; set; }
+
         public DbSet<User> UsersLoginInfo { get; set; }
 
         public DbSet<TokenValidation> TokenValidations { get; set; }
@@ -21,6 +23,7 @@ namespace Project_X_API.DataBase
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new UsersConfiguration());
             modelBuilder.ApplyConfiguration(new TokenValidationConfiguration());
+            modelBuilder.ApplyConfiguration(new ExplosiveDataConfiguration());
         }
     }
 }

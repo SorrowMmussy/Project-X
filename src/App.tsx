@@ -1,18 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import Home from './pages/Home';
 import Navigation from './components/Navigation';
 import UserInfo from './pages/UserInfo';
 import UserRegistry from './pages/UserRegistry';
-import ExplosiveSearchPage from './pages/ExplosiveSearchPage';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import UserRegistration from './pages/UserRegistration';
+import LoginForm, { isLoggedIn } from './pages/LoginForm';
 
 function App() {
-    const isAuthenticated = false;
+    const isAuthenticated = isLoggedIn();
 
     return (
         <BrowserRouter>
@@ -31,7 +30,8 @@ function App() {
                     ) : (
                         <>
                             <Route path="/" component={Home} exact />
-                            <Route path="/registration" component={UserRegistration} exact />
+                            <Route path="/registration/:token" component={UserRegistration} exact />
+                            <Route path="/login" component={LoginForm} exact />
                         </>
                     )}
                 </Switch>
