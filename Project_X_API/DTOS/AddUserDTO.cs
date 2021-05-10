@@ -2,7 +2,7 @@
 
 namespace Project_X_API.DTOS
 {
-    public class UserDTO
+    public class AddUserDTO
     {
         [Required]
         public string Username { get; set; }

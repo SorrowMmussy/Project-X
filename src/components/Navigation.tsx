@@ -31,6 +31,10 @@ const Navigation = () => (
                 <NavLink className="d-inline p-2 bg-dark text-white" to="login">
                     LoginForm
                 </NavLink>
+
+                <NavLink className="d-inline p-2 bg-dark text-white" to="explosiveRegister">
+                    ExplosiveRegistryPage
+                </NavLink>
             </Nav>
         </Navbar.Collapse>
     </Navbar>

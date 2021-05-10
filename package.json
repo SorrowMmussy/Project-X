@@ -14,6 +14,7 @@
         "bootstrap": "^4.6.0",
         "core-js": "^3.9.1",
         "jquery": "^1.9.1",
+        "node-sass": "^4.14.1",
         "password-hash-and-salt": "^0.1.4",
         "popper.js": "^1.16.1",
         "react": "^17.0.1",

@@ -13,7 +13,7 @@ const UserRegistry = () => {
     function sendEmail(userEmail: string) {
         return axios
             .post(
-                'http://localhost:54592/Authentication/Add',
+                'http://localhost:54592/Authentication/EmailRegistration',
                 { Email: userEmail },
                 {
                     method: 'POST',

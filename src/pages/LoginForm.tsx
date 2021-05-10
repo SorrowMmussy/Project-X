@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+
 import { Alert, Form } from 'react-bootstrap';
 import { Cookies } from 'react-cookie';
 import { useHistory, useParams } from 'react-router';
 import { isExpired, decodeToken } from 'react-jwt';
+
+import './LoginForm.scss';
 
 const cookies = new Cookies();
 const jwtCookieName = 'jwt';
@@ -40,6 +43,7 @@ const LoginForm = () => {
     return (
         <>
             <Form
+                className="LoginForm"
                 onSubmit={(e) => {
                     e.preventDefault();
                     handleSubmit();

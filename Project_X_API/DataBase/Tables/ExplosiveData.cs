@@ -23,10 +23,10 @@ namespace Project_X_API.DataBase.Tables
         public string Caliber { get; set; }
 
         [MaxLength(48)]
-        public string ExplosivePurposeId { get; set; }
+        public string ExplosivePurpose { get; set; }
 
         [MaxLength(48)]
-        public string DetonatorTypeId { get; set; }
+        public string DetonatorType { get; set; }
         
         public int Width { get; set; }
         

@@ -14,7 +14,7 @@ namespace Project_X_API.DataBase
 
         public DbSet<ExplosiveData> ExplosiveData { get; set; }
 
-        public DbSet<User> UsersLoginInfo { get; set; }
+        public DbSet<User> UserInfo { get; set; }
 
         public DbSet<TokenValidation> TokenValidations { get; set; }
 

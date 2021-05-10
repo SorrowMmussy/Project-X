@@ -47,7 +47,7 @@ namespace Project_X_API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] UserDTO userToAdd)
+        public IActionResult Add([FromBody] AddUserDTO userToAdd)
         {
             if (!ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace Project_X_API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Authenticate([FromBody] UserDTO userToAuthenticate)
+        public IActionResult Authenticate([FromBody] AuthenticateUserDTO userToAuthenticate)
         {
             if (!ModelState.IsValid)
             {

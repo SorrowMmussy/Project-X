@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import Home from './pages/Home';
@@ -9,6 +10,7 @@ import UserRegistry from './pages/UserRegistry';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import UserRegistration from './pages/UserRegistration';
 import LoginForm, { isLoggedIn } from './pages/LoginForm';
+import ExplosiveRegisterPage from './pages/ExplosiveRegisterPage';
 
 function App() {
     const isAuthenticated = isLoggedIn();
@@ -16,7 +18,7 @@ function App() {
     return (
         <BrowserRouter>
             <div className="container">
-                <h3 className="m-3 d-flex justify-content-center">React Test</h3>
+                <h3 className="m-3 d-flex justify-content-center">Explosives ARE OP!!!</h3>
 
                 <Navigation />
 
@@ -24,7 +26,7 @@ function App() {
                     {isAuthenticated ? (
                         <>
                             <Route path="/userInfo" component={UserInfo} exact />
-                            <Route path="/userRegistry" component={UserRegistry} exact />
+                            <Route path="/explosiveRegister" component={ExplosiveRegisterPage} exact />
                             {/*<Route path="/addNewUser" component={AddNewUserPage} exact />*/}
                         </>
                     ) : (
@@ -32,6 +34,7 @@ function App() {
                             <Route path="/" component={Home} exact />
                             <Route path="/registration/:token" component={UserRegistration} exact />
                             <Route path="/login" component={LoginForm} exact />
+                            <Route path="/userRegistry" component={UserRegistry} exact />
                         </>
                     )}
                 </Switch>
