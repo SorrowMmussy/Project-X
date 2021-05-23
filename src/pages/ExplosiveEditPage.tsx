@@ -1,12 +1,13 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { Cookies } from 'react-cookie';
 import { useHistory, useParams } from 'react-router';
 import { isExpired, decodeToken } from 'react-jwt';
-import CSVReader from 'react-csv-reader';
+import { Explosive } from './ExplosiveSearchPage';
+import { idText } from 'typescript';
 
-const ExplosiveRegisterPage = () => {
+const ExplosiveEditPage = () => {
     const [name, setName] = useState('');
     const [category, setCategory] = useState('');
     const [manufacturersCountry, setManufacturersCountry] = useState('');
@@ -21,8 +22,18 @@ const ExplosiveRegisterPage = () => {
     const [assembly, setAssembly] = useState('');
     const [note, setNote] = useState('');
 
+    const { id } = useParams<{ id: string }>();
+
     const [alertText, setAlertText] = useState('');
     const [isAlertVisible, setAlertVisible] = useState(false);
+
+    useEffect(() => {
+        axios.get<Explosive>('http://localhost:54592/ExplosivesData/GetById?id=' + id).then((response) => {
+            const data = response.data;
+            setName(data.name);
+            setCategory(data.category);
+        });
+    }, [id]);
 
     function addExplosiveData(
         name: string,
@@ -40,8 +51,9 @@ const ExplosiveRegisterPage = () => {
         height?: number
     ) {
         return axios.post(
-            'http://localhost:54592/ExplosivesData/Add',
+            'http://localhost:54592/ExplosivesData/Edit',
             {
+                Id: Number(id),
                 Name: name,
                 Category: category,
                 ManufacturersCountry: manufacturersCountry,
@@ -85,27 +97,6 @@ const ExplosiveRegisterPage = () => {
 
     return (
         <>
-            <CSVReader
-                onFileLoaded={(data, fileInfo) =>
-                    data.forEach((explosive) =>
-                        addExplosiveData(
-                            explosive[0],
-                            explosive[1],
-                            explosive[2],
-                            explosive[4],
-                            explosive[5],
-                            explosive[10],
-                            explosive[12],
-                            explosive[9],
-                            explosive[11],
-                            explosive[3],
-                            Number(explosive[6]),
-                            Number(explosive[7]),
-                            Number(explosive[8])
-                        )
-                    )
-                }
-            />
             <Form
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -184,7 +175,7 @@ const ExplosiveRegisterPage = () => {
                     <Form.Control value={note} onChange={(e) => setNote(e.target.value)} />
                 </Form.Group>
                 <>
-                    <Button as="input" type="submit" value="Add explosives data" />
+                    <Button as="input" type="submit" value="Save edit" />
                 </>
             </Form>
 
@@ -194,4 +185,4 @@ const ExplosiveRegisterPage = () => {
         </>
     );
 };
-export default ExplosiveRegisterPage;
+export default ExplosiveEditPage;

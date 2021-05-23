@@ -23,6 +23,21 @@ namespace Project_X_API.Services
             _explosivesRepository.AddExplosivesData(explosiveData);
         }
 
+        public void DeleteExplosivesDataFromDataBase(int explosiveDataId)
+        {
+            _explosivesRepository.DeleteExplosivesData(explosiveDataId);
+        }
+
+        public void EditExplosivesDataInDataBase(ExplosiveData explosiveData)
+        {
+            if (explosiveData.Name == null)
+            {
+                return;
+            }
+
+            _explosivesRepository.EditExplosivesData(explosiveData);
+        }
+
         public List<ExplosiveData> GetAllExplosivesDatas()
         {
             return _explosivesRepository.GetAllExplosivesData();

@@ -29,7 +29,8 @@ namespace Project_X_API
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins("http://localhost:3000").SetIsOriginAllowed((host) => "http://localhost:3000".Equals(host, StringComparison.InvariantCultureIgnoreCase)).AllowAnyMethod().AllowAnyHeader());
+                    builder => builder.WithOrigins("http://localhost:3000").SetIsOriginAllowed((host) => "http://localhost:3000"
+                        .Equals(host, StringComparison.InvariantCultureIgnoreCase)).AllowAnyMethod().AllowAnyHeader());
             });
 
             services.AddControllers();
@@ -38,6 +39,9 @@ namespace Project_X_API
             services.AddTransient<UserServices>();
             services.AddTransient<TokenValidationRepository>();
             services.AddTransient<UserRepository>();
+            services.AddTransient<ExplosivesDataServices>();
+            services.AddTransient<ExplosivesRepository>();
+            //Adding DataBaseContext with MySQL options
             services.AddDbContextPool<DataBaseContext>(dbContextOptions =>
                 dbContextOptions.UseMySql(Resources.ConnectionString, new MySqlServerVersion(new Version(8, 0, 24)), mySqlOptions => mySqlOptions
                       .CharSetBehavior(CharSetBehavior.NeverAppend)));

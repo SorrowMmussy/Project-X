@@ -12,28 +12,36 @@ const Navigation = () => (
                     Home
                 </NavLink>
 
-                <NavLink className="d-inline p-2 bg-dark text-white" to="UserInfo">
-                    UserInfo
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/UserInfo">
+                    User Info
                 </NavLink>
 
-                <NavLink className="d-inline p-2 bg-dark text-white" to="UserRegistry">
-                    UserRegistry
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/newUserRegistry">
+                    New User Registration
                 </NavLink>
 
-                <NavLink className="d-inline p-2 bg-dark text-white" to="ExplosiveSearchPage">
-                    ExplosiveSearchPage
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/explosiveSearchPage">
+                    Explosives Search Page
                 </NavLink>
 
-                <NavLink className="d-inline p-2 bg-dark text-white" to="registration">
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/registration">
                     UserRegistration
                 </NavLink>
 
-                <NavLink className="d-inline p-2 bg-dark text-white" to="login">
-                    LoginForm
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/login">
+                    Login page
                 </NavLink>
 
-                <NavLink className="d-inline p-2 bg-dark text-white" to="explosiveRegister">
-                    ExplosiveRegistryPage
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/explosiveRegister">
+                    Explosive registration page
+                </NavLink>
+
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/explosiveEditPage">
+                    Explosive edit page
+                </NavLink>
+
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/Logout">
+                    Logout
                 </NavLink>
             </Nav>
         </Navbar.Collapse>
