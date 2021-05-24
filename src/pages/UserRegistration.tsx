@@ -4,12 +4,12 @@ import { Alert, Form } from 'react-bootstrap';
 import { useParams } from 'react-router';
 
 const UserRegistration = () => {
-    const { token } = useParams<{ token: string }>();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
 
     const [alertText, setAlertText] = useState('');
+
     const [isAlertVisible, setAlertVisible] = useState(false);
 
     const handleSubmit = () => {
@@ -21,11 +21,7 @@ const UserRegistration = () => {
         }
 
         axios
-            .post('http://localhost:54592/Authentification/Add', {
-                username: userName,
-                password: password,
-                token: token,
-            })
+            .post('http://localhost:54592/Authentification/Add', { username: userName, password: password })
             .then((response) => {
                 setAlertText('Uzregistruotas');
                 setAlertVisible(true);
@@ -45,10 +41,21 @@ const UserRegistration = () => {
                     handleSubmit();
                 }}
             >
-                <Form.Control value={userName} onChange={(e) => setUserName(e.target.value)} />
-                <Form.Control value={password} onChange={(e) => setPassword(e.target.value)} />
-                <Form.Control value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} />
-                <button type="submit">submit</button>
+                <Form.Group controlId="manufacturersCountry">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control value={userName} onChange={(e) => setUserName(e.target.value)} />
+                </Form.Group>
+
+                <Form.Group controlId="manufacturersCountry">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control value={password} onChange={(e) => setPassword(e.target.value)} />
+                </Form.Group>
+
+                <Form.Group controlId="manufacturersCountry">
+                    <Form.Label>Repeat password</Form.Label>
+                    <Form.Control value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} />
+                </Form.Group>
+                <button type="submit">Comfirm</button>
             </Form>
 
             <Alert variant="danger" show={isAlertVisible}>

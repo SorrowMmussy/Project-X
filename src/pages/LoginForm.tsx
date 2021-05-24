@@ -49,9 +49,16 @@ const LoginForm = () => {
                     handleSubmit();
                 }}
             >
-                <Form.Control value={userName} onChange={(e) => setUserName(e.target.value)} />
-                <Form.Control value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button type="submit">login</button>
+                <Form.Group controlId="manufacturersCountry">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control value={userName} onChange={(e) => setUserName(e.target.value)} />
+                </Form.Group>
+
+                <Form.Group controlId="manufacturersCountry">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control value={password} onChange={(e) => setPassword(e.target.value)} />
+                </Form.Group>
+                <button type="submit">Log in</button>
             </Form>
 
             <Alert variant="danger" show={isAlertVisible}>

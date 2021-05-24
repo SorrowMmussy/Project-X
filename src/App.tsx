@@ -21,7 +21,7 @@ function App() {
     return (
         <BrowserRouter>
             <div className="container">
-                <h3 className="m-3 d-flex justify-content-center">Explosives ARE OP!!!</h3>
+                <h3 className="m-3 d-flex justify-content-center">STANDARTINIŲ SPROGMENŲ APLIKACIJA</h3>
 
                 <Navigation />
 
